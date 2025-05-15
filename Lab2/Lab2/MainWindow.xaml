@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab2"
         mc:Ignorable="d"
-        Title="TextEditor" Height="450" Width="800">
+        Title="TextEditor"  Height="450" Width="800">
     <Window.Resources>
         <LinearGradientBrush x:Key="LinearPanelBrush">
             <GradientStop Color="Gold" Offset="0"></GradientStop>
@@ -25,30 +25,32 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" BorderBrush="DarkOrange" BorderThickness="2" CornerRadius="10" Background="{StaticResource LinearPanelBrush}"></Border>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Height="60" >
-            <Button>
-                <Image Source="images/image_1.png" />
+            <Button Command="Open" ToolTip="Відкрити">
+                <Image Source="/images/image_1.png" />
             </Button>
-            <Button>
-                <Image Source="images/image_2.png"/>
+            <Button Command="Delete" ToolTip="Стерти">
+                <Image Source="/images/image_2.png"/>
             </Button>
-            <Button>
-                <Image Source="images/image_3.png"/>
+            <Button  Command="Copy" CommandTarget="{Binding ElementName=inputTextBox}">
+                <Image Source="/images/image_3.png"/>
             </Button>
-            <Button>
-                <Image Source="images/image_4.png" />
+            <Button  Command="Paste" CommandTarget="{Binding ElementName=inputTextBox}">
+                <Image Source="/images/image_4.png" />
             </Button>
         </StackPanel>
         <Border Grid.Row="1" BorderBrush="DarkOrange" BorderThickness="2" CornerRadius="10" Background="{StaticResource LinearPanelBrush}"></Border>
         <Grid Grid.Row="1" >
             <Grid.RowDefinitions>
-                <RowDefinition ></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             <ScrollViewer Margin="30">
-                <TextBox Grid.Row="0" Text="Write your text here" TextWrapping="Wrap" ></TextBox>
+                <TextBox Grid.Row="0" Name="inputTextBox" Text="" TextWrapping="Wrap" FontSize="{Binding ElementName=fontSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </ScrollViewer>
-            <DockPanel Grid.Row="1">
-                <Button  DockPanel.Dock="Bottom" Width="20" Margin="0,0,0,20"  Style="{x:Null}">Ok</Button>
+            <DockPanel Grid.Row="1" Margin="30,0,0,0">
+                <Label>Розмір шрифту :</Label>
+                <Slider   Margin="4" MinWidth="100" Name="fontSlider" Maximum="100" Minimum="12" />
+                <Button DockPanel.Dock="Bottom" Width="20" Margin="0,0,0,20"  Style="{x:Null}"  ToolTip="Зберегти" Command="Save">Ok</Button>
             </DockPanel>
         </Grid>
     </Grid>
